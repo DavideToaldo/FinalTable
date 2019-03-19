@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <title>NEW TABLE</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+
+    <style>
+        *{
+            font-size: 11px;
+            text-align: center;
+            font-family: sans-serif;
+        }
+        table {
+            border-collapse: separate;
+            border-spacing: 1px;
+        }
+        th,
+        td {
+            padding: 5px 5px;
+        }
+        th {
+            /*font-size: 17px;*/
+            background: #395870;
+            color: #fff;
+            text-align: center;
+        }
+            tbody tr:nth-child(even) {
+            background: #f0f0f2;
+        }
+        td {
+            border-bottom: 1px solid #cecfd5;
+            border-right: 1px solid #cecfd5;
+        }
+        td:first-child {
+            border-left: 1px solid #cecfd5;
+        }
+        .filterRefresh {
+            font-size: 10px;
+            margin-left: 449px;
+            margin-top: 25px;
+            margin-bottom: 25px;
+        }
+        .colorTd{
+            color: #E69C1C;
+        }
+        .select-style {
+            padding: 0;
+            margin: 0;
+            border: 1px solid #ccc;
+            width: 60px;
+            border-radius: 3px;
+            overflow: hidden;
+            background-color: #fff;
+            background: #fff;
+            position: relative;
+        }
+        .select-style:after {
+            top: 50%;
+            left: 75%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+            border-color: rgba(0, 0, 0, 0);
+            border-top-color: #000000;
+            border-width: 5px;
+            margin-top: -2px;
+            z-index: 100;
+        }
+        .select-style select {
+            padding: 5px 8px;
+            width: 130%;
+            border: none;
+            box-shadow: none;
+            background-color: transparent;
+            background-image: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+        .select-style select:focus {
+            outline: none;
+        }
+        a {
+            color:black;
+        }
+    </style>
+
+</head>
+<body>
+
+    <table id='data'; style="background-color: white"; align="center">
+        <tr>
+            <th rowspan="2">Nome</th>
+            <th rowspan="2">Spessore
+                <br>
+                (mm)
+                <br>
+                <br>
+                <div class="select-style">
+                    <select id='select-spessore' class="custom-select">
+                        <option value="all">All</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+            </th>
+            <th rowspan="2">Lunghezza
+                <br>
+                (cm)
+                <br>
+                <br>
+                <div class="select-style">
+                    <select id='select-lunghezza' class="custom-select">
+                        <option value="all">All</option>
+                        <option value="200">200</option>
+                        <option value="250">250</option>
+                        <option value="300">300</option>
+                        <option value="350">350</option>
+                        <option value="400">400</option>
+                    </select>  
+                </div>           
+            </th>
+            <th rowspan="2">Larghezza
+                <br>
+                (cm)
+                <br>
+                <br>
+                <div class="select-style">
+                    <select id='select-larghezza' class="custom-select">
+                        <option value="all">All</option>
+                        <option value="200">200</option>
+                        <option value="250">250</option>
+                        <option value="300">300</option>
+                        <option value="350">350</option>
+                        <option value="400">400</option>
+                    </select>
+                </div>
+            </th>
+            <th rowspan="2">Altezza
+                <br>
+                (cm)
+                <br>
+                <br>
+                <div class="select-style">
+                    <select id='select-altezza' class="custom-select">
+                        <option value="all">All</option>
+                        <option value="150">150</option>
+                        <option value="200">200</option>
+                        <option value="250">250</option>
+                        <option value="300">300</option>
+                        <option value="350">350</option>
+                        <option value="450">450</option>
+                    </select>
+                </div>
+            </th>
+            <th rowspan="2">Confezione
+                <br>
+                da
+                <br>
+                <br>
+                <div class="select-style">
+                    <select id='select-confezione' class="custom-select">
+                        <option value="all">All</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+            </th>
+            <th class="zerobrd" colspan="5">Prezzo €/cad</th>
+            <th rowspan="2">Quantità</th>
+        </tr>
+        <tr>
+            <th class="nobrd" colspan="1">- di 100</th>
+            <th class="nobrd" colspan="1">per 100 e +</th>
+            <th class="nobrd" colspan="1">per 200 e +</th>
+            <th class="nobrd" colspan="1">per 400 e +</th>
+            <th class="nobrd" colspan="1">per 800 e +</th>
+        </tr>
+
+        <tr>
+            <td><b><a href="https://geniuspack.it/product/ms-1/">MS- 1</a></b></td>
+            <td>3</td>
+            <td>200</td>
+            <td>200</td>
+            <td>200</td>
+            <td>10</td>
+            <td class="colorTd">0,95</td>
+            <td class="colorTd">0,88</td>
+            <td class="colorTd">0,84</td>
+            <td class="colorTd">0,80</td>
+            <td class="colorTd">0,74</td>
+            <td>
+                <input type="text" id="number" placeholder="Qtà">
+                <input type="button" value="+" onclick="FunctionMs1Plus()">
+                <input type="button" value="-" onclick="FunctionMs1Less()"> 
+                <input type="button" class="woo-cart" value="Aggiungi" onclick="AddCart()">
+            </td>
+        </tr>
+        <tr>
+            <td><b><a href="https://geniuspack.it/product/ms-2/">MS- 2</a></b></td>
+            <td>3</td>
+            <td>200</td>
+            <td>200</td>
+            <td>250</td>
+            <td>10</td>
+            <td class="colorTd">1,04</td>
+            <td class="colorTd">0,97</td>
+            <td class="colorTd">0,92</td>
+            <td class="colorTd">0,87</td>
+            <td class="colorTd">0,81</td>
+            <td>
+                    <input type="text" id="number2" placeholder="Qtà">
+                    <input type="button" value="+" onclick="FunctionMs2Pluss()">
+                    <input type="button" value="-" onclick="FunctionMs2Less()"> 
+                    <input type="button" class="woo-cart" value="Aggiungi" onclick="AddCart()">
+            </td>
+        </tr>
+        <tr>
+            <td><b><a href="https://geniuspack.it/product/ms-3/">MS- 3</a></b></td>
+            <td>3</td>
+            <td>200</td>
+            <td>200</td>
+            <td>300</td>
+            <td>10</td>
+            <td class="colorTd">1,08</td>
+            <td class="colorTd">1,01</td>
+            <td class="colorTd">0,96</td>
+            <td class="colorTd">0,91</td>
+            <td class="colorTd">0,84</td>
+            <td>
+                <input type="text" id="number3" placeholder="Qtà">
+                <input type="button" value="+" onclick="FunctionMs3Plus()">
+                <input type="button" value="-" onclick="FunctionMs3Less()"> 
+                <input type="button" class="woo-cart" value="Aggiungi" onclick="AddCart()">
+            </td>
+        </tr>
+        <tr>
+            <td><b><a href="https://geniuspack.it/product/ms-5/">MS- 5</a></b></td>
+            <td>3</td>
+            <td>250</td>
+            <td>250</td>
+            <td>150</td>
+            <td>10</td>
+            <td class="colorTd">1,08</td>
+            <td class="colorTd">1,01</td>
+            <td class="colorTd">0,96</td>
+            <td class="colorTd">0,91</td>
+            <td class="colorTd">0,84</td>
+            <td>
+                <input type="text" id="number5" placeholder="Qtà">
+                <input type="button" value="+" onclick="FunctionMs5Plus()">
+                <input type="button" value="-" onclick="FunctionMs5Less()"> 
+                <input type="button" class="woo-cart" value="Aggiungi" onclick="AddCart()">  
+            </td>
+        </tr>
+        <tr>
+            <td><b><a href="https://geniuspack.it/product/ms-7/">MS- 7</a></b></td>
+            <td>3</td>
+            <td>250</td>
+            <td>250</td>
+            <td>200</td>
+            <td>10</td>
+            <td class="colorTd">0,95</td>
+            <td class="colorTd">0,88</td>
+            <td class="colorTd">0,84</td>
+            <td class="colorTd">0,80</td>
+            <td class="colorTd">0,74</td>
+            <td>
+                <input type="text" id="number7" placeholder="Qtà">
+                <input type="button" value="+" onclick="FunctionMs7Plus()">
+                <input type="button" value="-" onclick="FunctionMs7Less()"> 
+                <input type="button" class="woo-cart" value="Aggiungi" onclick="AddCart()">
+            </td>
+        </tr>
+        <tr>
+            <td><b><a href="https://geniuspack.it/product/ms-9/">MS- 9</a></b></td>
+            <td>3</td>
+            <td>250</td>
+            <td>250</td>
+            <td>300</td>
+            <td>10</td>
+            <td class="colorTd">1,58</td>
+            <td class="colorTd">1,47</td>
+            <td class="colorTd">1,40</td>
+            <td class="colorTd">1,33</td>
+            <td class="colorTd">1,23</td>
+            <td>
+                <input type="text" id="number9" placeholder="Qtà">
+                <input type="button" value="+" onclick="FunctionMs9Plus()">
+                <input type="button" value="-" onclick="FunctionMs9Less()"> 
+                <input type="button" class="woo-cart" value="Aggiungi" onclick="AddCart()">
+            </td>
+        </tr>
+        <tr>
+            <td><b><a href="https://geniuspack.it/product/ms-10/">MS- 10</a></b></td>
+            <td>3</td>
+            <td>250</td>
+            <td>250</td>
+            <td>450</td>
+            <td>10</td>
+            <td class="colorTd">1,80</td>
+            <td class="colorTd">1,68</td>
+            <td class="colorTd">1,60</td>
+            <td class="colorTd">1,52</td>
+            <td class="colorTd">1,40</td>
+            <td>
+                <input type="text" id="number10" placeholder="Qtà">
+                <input type="button" value="+" onclick="FunctionMs10Plus()">
+                <input type="button" value="-" onclick="FunctionMs10Less()"> 
+                <input type="button" class="woo-cart" value="Aggiungi" onclick="AddCart()">    
+            </td>
+        </tr>
+        <tr>
+            <td><b><a href="https://geniuspack.it/product/ms-11/">MS- 11</a></b></td>
+            <td>4</td>
+            <td>300</td>
+            <td>300</td>
+            <td>200</td>
+            <td>10</td>
+            <td class="colorTd">1,58</td>
+            <td class="colorTd">1,47</td>
+            <td class="colorTd">1,40</td>
+            <td class="colorTd">1,33</td>
+            <td class="colorTd">1,23</td>
+            <td>
+                <input type="text" id="number11" placeholder="Qtà">
+                <input type="button" value="+" onclick="FunctionMs11Plus()">
+                <input type="button" value="-" onclick="FunctionMs11Less()"> 
+                <input type="button" class="woo-cart" value="Aggiungi" onclick="AddCart()">
+            </td>
+        </tr>
+        <tr>
+            <td><b><a href="https://geniuspack.it/product/ms-12/">MS- 12</a></b></td>
+            <td>4</td>
+            <td>300</td>
+            <td>300</td>
+            <td>250</td>
+            <td>10</td>
+            <td class="colorTd">1,71</td>
+            <td class="colorTd">1,60</td>
+            <td class="colorTd">1,52</td>
+            <td class="colorTd">1,44</td>
+            <td class="colorTd">1,33</td>
+            <td>
+                <input type="text" id="number12" placeholder="Qtà">
+                <input type="button" value="+" onclick="FunctionMs12Plus()">
+                <input type="button" value="-" onclick="FunctionMs12Less()"> 
+                <input type="button" class="woo-cart" value="Aggiungi" onclick="AddCart()">
+            </td>
+        </tr>
+            <td><b><a href="https://geniuspack.it/product/ms-13/">MS- 13</a></b></td>
+            <td>4</td>
+            <td>300</td>
+            <td>300</td>
+            <td>300</td>
+            <td>10</td>
+            <td class="colorTd">1,80</td>
+            <td class="colorTd">1,68</td>
+            <td class="colorTd">1,60</td>
+            <td class="colorTd">1,52</td>
+            <td class="colorTd">1,40</td>
+            <td>
+                <input type="text" id="number13" placeholder="Qtà">
+                <input type="button" value="+" onclick="FunctionMs13Plus()">
+                <input type="button" value="-" onclick="FunctionMs13Less()"> 
+                <input type="button" class="woo-cart" value="Aggiungi" onclick="AddCart()">
+            </td>
+        </tr>
+        <tr>
+            <td><b><a href="https://geniuspack.it/product/ms-14/">MS- 14</a></b></td>
+            <td>4</td>
+            <td>300</td>
+            <td>300</td>
+            <td>350</td>
+            <td>10</td>
+            <td class="colorTd">1,94</td>
+            <td class="colorTd">1,81</td>
+            <td class="colorTd">1,72</td>
+            <td class="colorTd">1,63</td>
+            <td class="colorTd">1,51</td>
+            <td>
+                <input type="text" id="number14" placeholder="Qtà">
+                <input type="button" value="+" onclick="FunctionMs14Plus()">
+                <input type="button" value="-" onclick="FunctionMs14Less()"> 
+                <input type="button" class="woo-cart" value="Aggiungi" onclick="AddCart()">
+            </td>
+        </tr>
+        <tr>
+            <td><b><a href="https://geniuspack.it/product/ms-15/">MS- 15</a></b></td>
+            <td>4</td>
+            <td>350</td>
+            <td>350</td>
+            <td>200</td>
+            <td>10</td>
+            <td class="colorTd">1,89</td>
+            <td class="colorTd">1,76</td>
+            <td class="colorTd">1,68</td>
+            <td class="colorTd">1,60</td>
+            <td class="colorTd">1,47</td>
+            <td>
+                <input type="text" id="number15" placeholder="Qtà">
+                <input type="button" value="+" onclick="FunctionMs15Plus()">
+                <input type="button" value="-" onclick="FunctionMs15Less()"> 
+                <input type="button" class="woo-cart" value="Aggiungi" onclick="AddCart()">
+            </td>
+        </tr>
+        <tr>
+            <td><b><a href="https://geniuspack.it/product/ms-16/">MS- 16</a></b></td>
+            <td>4</td>
+            <td>350</td>
+            <td>350</td>
+            <td>250</td>
+            <td>10</td>
+            <td class="colorTd">2,03</td>
+            <td class="colorTd">1,89</td>
+            <td class="colorTd">1,80</td>
+            <td class="colorTd">1,71</td>
+            <td class="colorTd">1,58</td>
+            <td>
+                <input type="text" id="number16" placeholder="Qtà">
+                <input type="button" value="+" onclick="FunctionMs16Plus()">
+                <input type="button" value="-" onclick="FunctionMs16Less()"> 
+                <input type="button" class="woo-cart" value="Aggiungi" onclick="AddCart()">
+            </td>
+        </tr>
+        <tr>
+            <td><b><a href="https://geniuspack.it/product/ms-17/">MS- 17</a></b></td>
+            <td>4</td>
+            <td>350</td>
+            <td>350</td>
+            <td>300</td>
+            <td>10</td>
+            <td class="colorTd">2,16</td>
+            <td class="colorTd">2,02</td>
+            <td class="colorTd">1,92</td>
+            <td class="colorTd">1,82</td>
+            <td class="colorTd">1,68</td>
+            <td>
+                <input type="text" id="number17" placeholder="Qtà">
+                <input type="button" value="+" onclick="FunctionMs17Plus()">
+                <input type="button" value="-" onclick="FunctionMs17Less()"> 
+                <input type="button" class="woo-cart" value="Aggiungi" onclick="AddCart()">
+            </td>
+        </tr>
+        <tr>
+            <td><b><a href="https://geniuspack.it/product/ms-18/">MS- 18</a></b></td>
+            <td>4</td>
+            <td>350</td>
+            <td>350</td>
+            <td>350</td>
+            <td>10</td>
+            <td class="colorTd">2,30</td>
+            <td class="colorTd">2,14</td>
+            <td class="colorTd">2,04</td>
+            <td class="colorTd">1,94</td>
+            <td class="colorTd">1,79</td>
+            <td>
+                <input type="text" id="number18" placeholder="Qtà">
+                <input type="button" value="+" onclick="FunctionMs18Plus()">
+                <input type="button" value="-" onclick="FunctionMs18Less()"> 
+                <input type="button" class="woo-cart" value="Aggiungi" onclick="AddCart()">
+            </td>
+        </tr>
+        <tr>
+            <td><b><a href="https://geniuspack.it/product/ms-19/">MS- 19</a></b></td>
+            <td>4</td>
+            <td>400</td>
+            <td>200</td>
+            <td>200</td>
+            <td>10</td>
+            <td class="colorTd">2,25</td>
+            <td class="colorTd">2,10</td>
+            <td class="colorTd">2,00</td>
+            <td class="colorTd">1,90</td>
+            <td class="colorTd">1,75</td>
+            <td>
+                <input type="text" id="number19" placeholder="Qtà">
+                <input type="button" value="+" onclick="FunctionMs19Plus()">
+                <input type="button" value="-" onclick="FunctionMs19Less()"> 
+                <input type="button" class="woo-cart" value="Aggiungi" onclick="AddCart()">
+            </td>
+        </tr>
+        <tr>
+            <td><b><a href="https://geniuspack.it/product/ms-20/">MS- 20</a></b></td>
+            <td>4</td>
+            <td>400</td>
+            <td>200</td>
+            <td>250</td>
+            <td>10</td>
+            <td class="colorTd">2,52</td>
+            <td class="colorTd">2,35</td>
+            <td class="colorTd">2,24</td>
+            <td class="colorTd">2,13</td>
+            <td class="colorTd">1,96</td>
+            <td>
+                <input type="text" id="number20" placeholder="Qtà">
+                <input type="button" value="+" onclick="FunctionMs20Plus()">
+                <input type="button" value="-" onclick="FunctionMs20Less()"> 
+                <input type="button" class="woo-cart" value="Aggiungi" onclick="AddCart()">   
+            </td>
+        </tr>
+        <tr>
+            <td><b><a href="https://geniuspack.it/product/ms-7/">MS- 70</a></b></td>
+            <td>3</td>
+            <td>250</td>
+            <td>200</td>
+            <td>250</td>
+            <td>10</td>
+            <td class="colorTd">0,95</td>
+            <td class="colorTd">0,88</td>
+            <td class="colorTd">0,84</td>
+            <td class="colorTd">0,80</td>
+            <td class="colorTd">0,74</td>
+            <td>
+                <input type="text" id="number70" placeholder="Qtà">
+                <input type="button" value="+" onclick="FunctionMs70Plus()">
+                <input type="button" value="-" onclick="FunctionMs70Less()"> 
+                <input type="button" class="woo-cart" value="Aggiungi" onclick="AddCart()">  
+            </td>
+        </tr>
+        <tr>
+            <td><b><a href="https://geniuspack.it/product/ms-9/">MS- 90</a></b></td>
+            <td>3</td>
+            <td>250</td>
+            <td>200</td>
+            <td>350</td>
+            <td>10</td>
+            <td class="colorTd">1,58</td>
+            <td class="colorTd">1,47</td>
+            <td class="colorTd">1,40</td>
+            <td class="colorTd">1,33</td>
+            <td class="colorTd">1,23</td>
+            <td>
+                <input type="text" id="number90" placeholder="Qtà">
+                <input type="button" value="+" onclick="FunctionMs90Plus()">
+                <input type="button" value="-" onclick="FunctionMs90Less()"> 
+                <input type="button" class="woo-cart" value="Aggiungi" onclick="AddCart()">
+            </td>
+        </tr>
+        <tr>
+            <td><b><a href="https://geniuspack.it/product/ms-20/">MS- 200</a></b></td>
+            <td>4</td>
+            <td>400</td>
+            <td>200</td>
+            <td>300</td>
+            <td>10</td>
+            <td class="colorTd">2,52</td>
+            <td class="colorTd">2,35</td>
+            <td class="colorTd">2,24</td>
+            <td class="colorTd">2,13</td>
+            <td class="colorTd">1,96</td>
+            <td>
+                <input type="text" id="number200" placeholder="Qtà">
+                <input type="button" value="+" onclick="FunctionMs200Plus()">
+                <input type="button" value="-" onclick="FunctionMs200Less()"> 
+                <input type="button" class="woo-cart" value="Aggiungi" onclick="AddCart()">  
+            </td>
+        </tr>
+    </table>
+    
+    <!--SCRIPT PER LE FUNZIONI DELLA COLONNA DELLE QUANTITA'-->
+    <script>
+        // FUNZIONE DEL CARRELLO
+            function AddCart(){
+                    console.log(value);
+                }
+        //FUNZIONE MS1
+            function FunctionMs1Plus(){
+                var value = parseInt(document.getElementById('number').value,);
+                // parseInt serve per avere i numeri interi
+                value = isNaN(value) ? 0 : value;
+                value++;
+                document.getElementById('number').value = value;
+            } 
+            function FunctionMs1Less(){
+                var value = parseInt(document.getElementById('number').value, /* 10 */);
+                value = isNaN(value) ? 0 : value;
+                value--;
+                document.getElementById('number').value = value;
+            }  
+        //FUNZIONE MS2
+            function FunctionMs2Pluss(){
+                var value = parseInt(document.getElementById('number2').value,);
+                value = isNaN(value) ? 0 : value;
+                value++;
+                document.getElementById('number2').value = value;
+            } 
+            function FunctionMs2Less(){
+                var value = parseInt(document.getElementById('number2').value, /* 10 */);
+                value = isNaN(value) ? 0 : value;
+                value--;
+                document.getElementById('number2').value = value;
+            }  
+        //FUNZIONE MS3
+            function FunctionMs3Plus(){
+                var value = parseInt(document.getElementById('number3').value,);
+                value = isNaN(value) ? 0 : value;
+                value++;
+                document.getElementById('number3').value = value;
+            } 
+            function FunctionMs3Less(){
+                var value = parseInt(document.getElementById('number3').value, /* 10 */);
+                value = isNaN(value) ? 0 : value;
+                value--;
+                document.getElementById('number3').value = value;
+            }
+        //FUNZIONE MS5
+            function FunctionMs5Plus(){
+                var value = parseInt(document.getElementById('number5').value,);
+                value = isNaN(value) ? 0 : value;
+                value++;
+                document.getElementById('number5').value = value;
+            } 
+            function FunctionMs5Less(){
+                var value = parseInt(document.getElementById('number5').value, /* 10 */);
+                value = isNaN(value) ? 0 : value;
+                value--;
+                document.getElementById('number5').value = value;
+            } 
+        //FUNZIONE MS7
+        function FunctionMs7Plus(){
+                var value = parseInt(document.getElementById('number7').value,);
+                value = isNaN(value) ? 0 : value;
+                value++;
+                document.getElementById('number7').value = value;
+            } 
+            function FunctionMs7Less(){
+                var value = parseInt(document.getElementById('number7').value, /* 10 */);
+                value = isNaN(value) ? 0 : value;
+                value--;
+                document.getElementById('number7').value = value;
+            }
+        //FUNZIONE MS9
+            function FunctionMs9Plus(){
+                var value = parseInt(document.getElementById('number9').value,);
+                value = isNaN(value) ? 0 : value;
+                value++;
+                document.getElementById('number9').value = value;
+            } 
+            function FunctionMs9Less(){
+                var value = parseInt(document.getElementById('number9').value, /* 10 */);
+                value = isNaN(value) ? 0 : value;
+                value--;
+                document.getElementById('number9').value = value;
+            } 
+        //FUNZIONE MS10
+            function FunctionMs10Plus(){
+                var value = parseInt(document.getElementById('number10').value,);
+                value = isNaN(value) ? 0 : value;
+                value++;
+                document.getElementById('number10').value = value;
+            } 
+            function FunctionMs10Less(){
+                var value = parseInt(document.getElementById('number10').value, /* 10 */);
+                value = isNaN(value) ? 0 : value;
+                value--;
+                document.getElementById('number10').value = value;
+            }
+        //FUNZIONE MS11
+            function FunctionMs11Plus(){
+                var value = parseInt(document.getElementById('number11').value,);
+                value = isNaN(value) ? 0 : value;
+                value++;
+                document.getElementById('number11').value = value;
+            } 
+            function FunctionMs11Less(){
+                var value = parseInt(document.getElementById('number11').value, /* 10 */);
+                value = isNaN(value) ? 0 : value;
+                value--;
+                document.getElementById('number11').value = value;
+            }
+        //FUNZIONE MS12
+            function FunctionMs12Plus(){
+                var value = parseInt(document.getElementById('number12').value,);
+                value = isNaN(value) ? 0 : value;
+                value++;
+                document.getElementById('number12').value = value;
+            } 
+            function FunctionMs12Less(){
+                var value = parseInt(document.getElementById('number12').value, /* 10 */);
+                value = isNaN(value) ? 0 : value;
+                value--;
+                document.getElementById('number12').value = value;
+            }
+        //FUNZIONE MS13
+            function FunctionMs13Plus(){
+                var value = parseInt(document.getElementById('number13').value,);
+                value = isNaN(value) ? 0 : value;
+                value++;
+                document.getElementById('number13').value = value;
+            } 
+            function FunctionMs13Less(){
+                var value = parseInt(document.getElementById('number13').value, /* 10 */);
+                value = isNaN(value) ? 0 : value;
+                value--;
+                document.getElementById('number13').value = value;
+            }
+        //FUNZIONE MS14
+            function FunctionMs14Plus(){
+                var value = parseInt(document.getElementById('number14').value,);
+                value = isNaN(value) ? 0 : value;
+                value++;
+                document.getElementById('number14').value = value;
+            } 
+            function FunctionMs14Less(){
+                var value = parseInt(document.getElementById('number14').value, /* 10 */);
+                value = isNaN(value) ? 0 : value;
+                value--;
+                document.getElementById('number14').value = value;
+            }
+        //FUNZIONE MS15
+            function FunctionMs15Plus(){
+                var value = parseInt(document.getElementById('number15').value,);
+                value = isNaN(value) ? 0 : value;
+                value++;
+                document.getElementById('number15').value = value;
+            } 
+            function FunctionMs15Less(){
+                var value = parseInt(document.getElementById('number15').value, /* 10 */);
+                value = isNaN(value) ? 0 : value;
+                value--;
+                document.getElementById('number15').value = value;
+            }
+        //FUNZIONE MS16
+            function FunctionMs16Plus(){
+                var value = parseInt(document.getElementById('number16').value,);
+                value = isNaN(value) ? 0 : value;
+                value++;
+                document.getElementById('number16').value = value;
+            } 
+            function FunctionMs16Less(){
+                var value = parseInt(document.getElementById('number16').value, /* 10 */);
+                value = isNaN(value) ? 0 : value;
+                value--;
+                document.getElementById('number16').value = value;
+            }
+        //FUNZIONE MS17
+            function FunctionMs17Plus(){
+                var value = parseInt(document.getElementById('number17').value,);
+                value = isNaN(value) ? 0 : value;
+                value++;
+                document.getElementById('number17').value = value;
+            } 
+            function FunctionMs17Less(){
+                var value = parseInt(document.getElementById('number17').value, /* 10 */);
+                value = isNaN(value) ? 0 : value;
+                value--;
+                document.getElementById('number17').value = value;
+            }
+        //FUNZIONE MS18
+            function FunctionMs18Plus(){
+                var value = parseInt(document.getElementById('number18').value,);
+                value = isNaN(value) ? 0 : value;
+                value++;
+                document.getElementById('number18').value = value;
+            } 
+            function FunctionMs18Less(){
+                var value = parseInt(document.getElementById('number18').value, /* 10 */);
+                value = isNaN(value) ? 0 : value;
+                value--;
+                document.getElementById('number18').value = value;
+            }
+        //FUNZIONE MS19
+            function FunctionMs19Plus(){
+                var value = parseInt(document.getElementById('number19').value,);
+                value = isNaN(value) ? 0 : value;
+                value++;
+                document.getElementById('number19').value = value;
+            } 
+            function FunctionMs19Less(){
+                var value = parseInt(document.getElementById('number19').value, /* 10 */);
+                value = isNaN(value) ? 0 : value;
+                value--;
+                document.getElementById('number19').value = value;
+            }
+        //FUNZIONE MS20
+            function FunctionMs20Plus(){
+                var value = parseInt(document.getElementById('number20').value,);
+                value = isNaN(value) ? 0 : value;
+                value++;
+                document.getElementById('number20').value = value;
+            } 
+            function FunctionMs20Less(){
+                var value = parseInt(document.getElementById('number20').value, /* 10 */);
+                value = isNaN(value) ? 0 : value;
+                value--;
+                document.getElementById('number20').value = value;
+            }
+        //FUNZIONE MS70
+            function FunctionMs70Plus(){
+                var value = parseInt(document.getElementById('number70').value,);
+                value = isNaN(value) ? 0 : value;
+                value++;
+                document.getElementById('number70').value = value;
+            } 
+            function FunctionMs70Less(){
+                var value = parseInt(document.getElementById('number70').value, /* 10 */);
+                value = isNaN(value) ? 0 : value;
+                value--;
+                document.getElementById('number70').value = value;
+            }
+        //FUNZIONE MS90
+            function FunctionMs90Plus(){
+                var value = parseInt(document.getElementById('number90').value,);
+                value = isNaN(value) ? 0 : value;
+                value++;
+                document.getElementById('number90').value = value;
+            } 
+            function FunctionMs90Less(){
+                var value = parseInt(document.getElementById('number90').value, /* 10 */);
+                value = isNaN(value) ? 0 : value;
+                value--;
+                document.getElementById('number90').value = value;
+            }
+        //FUNZIONE MS200
+            function FunctionMs200Plus(){
+                var value = parseInt(document.getElementById('number200').value,);
+                value = isNaN(value) ? 0 : value;
+                value++;
+                document.getElementById('number200').value = value;
+            } 
+            function FunctionMs200Less(){
+                var value = parseInt(document.getElementById('number200').value, /* 10 */);
+                value = isNaN(value) ? 0 : value;
+                value--;
+                document.getElementById('number200').value = value;
+            }
+    </script>
+    <!--SCRIPT PER IL FILTRAGGIO DELLO SPESSORE-->
+        <script>
+            $("#select-spessore").change(function() {
+                var selection = $("#select-spessore").val();
+                if (selection == "all")
+                {
+                    $("#data tr").show();
+                } else
+                {
+                    $("#data tr").each(function() {
+                        if ($(this).find("th").length == 0)
+                        {
+                            if ($(this).find("td").eq(1).text().toLowerCase() == selection)
+                                //.eq equivale al numero di colonna; stesso funzionamento degli oggetti di javascript
+                                $(this).show();
+                            else
+                                $(this).hide();
+                        }
+                    });
+                }
+            });
+        </script>
+    <!--SCRIPT PER IL FILTRAGGIO DELLA LUNGHEZZA-->
+        <script>
+            $("#select-lunghezza").change(function() {
+                var selection = $("#select-lunghezza").val();
+                if (selection == "all")
+                {
+                    $("#data tr").show();
+                } else
+                {
+                    $("#data tr").each(function() {
+                        if ($(this).find("th").length == 0)
+                        {
+                            if ($(this).find("td").eq(2).text().toLowerCase() == selection)
+                                //.eq equivale al numero di colonna; stesso funzionamento degli oggetti di javascript
+                                $(this).show();
+                            else
+                                $(this).hide();
+                        }
+                    });
+                }
+            });
+        </script>
+    <!--SCRIPT PER IL FILTRAGGIO DELLA LARGHEZZA-->
+        <script>
+            $("#select-larghezza").change(function() {
+                var selection = $("#select-larghezza").val();
+                if (selection == "all")
+                {
+                    $("#data tr").show();
+                } else
+                {
+                    $("#data tr").each(function() {
+                        if ($(this).find("th").length == 0)
+                        {
+                            if ($(this).find("td").eq(3).text().toLowerCase() == selection)
+                                //.eq equivale al numero di colonna; stesso funzionamento degli oggetti di javascript
+                                $(this).show();
+                            else
+                                $(this).hide();
+                        }
+                    });
+                }
+            });
+        </script>
+    <!--SCRIPT PER IL FILTRAGGIO DELL'ALTEZZA-->
+        <script>
+            $("#select-altezza").change(function() {
+                var selection = $("#select-altezza").val();
+                if (selection == "all")
+                {
+                    $("#data tr").show();
+                } else
+                {
+                    $("#data tr").each(function() {
+                        if ($(this).find("th").length == 0)
+                        {
+                            if ($(this).find("td").eq(4).text().toLowerCase() == selection)
+                                //.eq equivale al numero di colonna; stesso funzionamento degli oggetti di javascript
+                                $(this).show();
+                            else
+                                $(this).hide();
+                        }
+                    });
+                }
+            });
+        </script>
+    <!--SCRIPT PER IL FILTRAGGIO DELLA CONFEZIONE-->
+        <script>
+            $("#select-confezione").change(function() {
+                var selection = $("#select-confezione").val();
+                if (selection == "all")
+                {
+                    $("#data tr").show();
+                } else
+                {
+                    $("#data tr").each(function() {
+                        if ($(this).find("th").length == 0)
+                        {
+                            if ($(this).find("td").eq(5).text().toLowerCase() == selection)
+                                //.eq equivale al numero di colonna; stesso funzionamento degli oggetti di javascript
+                                $(this).show();
+                            else
+                                $(this).hide();
+                        }
+                    });
+                }
+            });
+        </script>      
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+   
+</body>
+</html>
